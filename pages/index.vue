@@ -1,7 +1,8 @@
 <template>
   <div>
     <v-container>
-      {{ movies }}
+      <Pagination v-model="currentPage" :length="8" />
+      {{ currentPage }}
     </v-container>
   </div>
 </template>
@@ -12,16 +13,34 @@ export default {
   data() {
     return {
       movies: [],
+      currentPage: 1,
+      movieToSearch: null,
     }
   },
+
   async created() {
     try {
-      const response = await this.$getMovies()
-      this.movies = response
-      console.log(response)
+      await this.fetchMovies()
     } catch (error) {
       console.log(error)
     }
+  },
+  methods: {
+    async fetchMovies() {
+      try {
+        const response = await this.$getMovies('dracula', this.currentPage)
+        this.movies = response
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+  },
+  watch: {
+    currentPage: {
+      immediate: true,
+      handler: 'fetchMovies',
+    },
   },
 }
 </script>
