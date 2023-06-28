@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <Pagination v-model="currentPage" :length="8" />
-      {{ currentPage }}
+      <Switchs v-model="switchTheme" />
     </v-container>
   </div>
 </template>
@@ -13,8 +13,9 @@ export default {
   data() {
     return {
       movies: [],
+      switchTheme: false,
       currentPage: 1,
-      movieToSearch: null,
+      movieToSearch: 'love',
     }
   },
 
@@ -28,7 +29,10 @@ export default {
   methods: {
     async fetchMovies() {
       try {
-        const response = await this.$getMovies('dracula', this.currentPage)
+        const response = await this.$getMovies(
+          this.movieToSearch,
+          this.currentPage
+        )
         this.movies = response
         console.log(response)
       } catch (error) {

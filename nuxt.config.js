@@ -14,7 +14,12 @@ export default {
             { hid: 'description', name: 'description', content: '' },
             { name: 'format-detection', content: 'telephone=no' },
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            {
+                rel: 'stylesheet',
+                href: "https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto&family=Rowdies:wght@300&family=Staatliches&display=swap"
+            },
+        ],
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css
