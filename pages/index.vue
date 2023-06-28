@@ -1,10 +1,11 @@
 <template>
-  <div>
-    <v-container>
-      <Pagination v-model="currentPage" :length="8" />
+  <div class="background-image-container">
+    <v-container fluid>
+      <!-- <Pagination v-model="currentPage" :length="8" />
       <Switchs
         @updatedSwitch="switchTheme = $event"
-        :label="`Switch 1: ${switchTheme.toString()}`"
+        inset
+        prepend-icon="mdi-brightness-4"
       />
       <div>
         <p class="primary">HOLAHOLA</p>
@@ -12,7 +13,7 @@
         <p class="secondary">HOLA</p>
         <p class="warning">HOLA</p>
         <p class="error">HOLA</p>
-      </div>
+      </div> -->
     </v-container>
   </div>
 </template>
@@ -30,7 +31,6 @@ export default {
   },
 
   async created() {
-    console.log('vuetify', this.$vuetify.theme)
     try {
       await this.fetchMovies()
     } catch (error) {
@@ -63,3 +63,12 @@ export default {
   },
 }
 </script>
+<style>
+.background-image-container {
+  height: 100vh;
+  background-image: url('/pochoclo.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+</style>
