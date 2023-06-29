@@ -1,13 +1,11 @@
 <template>
-  <div></div>
+  <div>
+    <MultipleNavs :responsiveNav="$vuetify.breakpoint.xsOnly" />
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {}
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -70,7 +70,7 @@ export default {
                     success: colors.green.accent3,
                 },
                 dark: {
-                    cardBg: colors.black,
+                    cardBg: colors.grey.darken4,
                     primary: colors.blue.darken2,
                     accent: colors.grey.darken3,
                     secondary: colors.amber.darken3,
