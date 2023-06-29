@@ -3,10 +3,17 @@
     <v-container fluid>
       <Switchs @updatedSwitch="switchTheme = $event" inset color="white" />
       <div class="d-flex justify-center">
-        <Card width="450" height="600" cardClass="wrapper-login">
+        <Card
+          width="450"
+          height="600"
+          cardClass="wrapper-login"
+          color="cardBg"
+          elevation="10"
+          shaped
+        >
           <template #content>
             <v-container>
-              <v-card-title class="pa-0">Inicia sesión</v-card-title>
+              <v-card-title class="pa-0 display-1">Inicia sesión</v-card-title>
               <v-row class="pt-5">
                 <v-col cols="12">
                   <TextField
@@ -19,7 +26,7 @@
                     :error-messages="errorHandler('email', errorData.email)"
                   />
                   <TextField
-                    class="mt-n3"
+                    class="mt-n2"
                     filled
                     dense
                     v-model="password"
@@ -33,7 +40,7 @@
                 </v-col>
                 <v-col cols="12" class="py-0">
                   <Button
-                    class="w-100"
+                    class="w-100 py-5"
                     text="Iniciar sesión"
                     @click="routeLogin"
                     nuxt
