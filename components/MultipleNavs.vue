@@ -4,6 +4,7 @@
       <slot name="systemContent"></slot>
     </v-system-bar>
     <v-app-bar
+      app
       elevation="7"
       :color="$vuetify.theme.isDark ? black : blue"
       height="48"
@@ -15,6 +16,7 @@
       ></v-app-bar-nav-icon>
     </v-app-bar>
     <NavigationDrawer
+      app
       v-if="responsiveNav"
       :items="items"
       v-model="drawer"
@@ -25,6 +27,7 @@
     />
 
     <NavigationDrawer
+      app
       v-if="!responsiveNav"
       drawerClass="mt-n2"
       height="100vh"

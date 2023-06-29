@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  layout: 'movie',
   data() {
     return {
       movies: [],
