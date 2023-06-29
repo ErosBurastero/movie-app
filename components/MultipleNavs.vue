@@ -4,11 +4,9 @@
       <slot name="systemContent"></slot>
     </v-system-bar>
     <v-app-bar
-      app
       elevation="7"
       :color="$vuetify.theme.isDark ? black : blue"
       height="48"
-      flat
     >
       <v-app-bar-nav-icon
         :color="$vuetify.theme.isDark ? white : black"
@@ -20,19 +18,21 @@
       v-if="responsiveNav"
       :items="items"
       v-model="drawer"
-      itemClass="text-white"
-      subItemClass="bg-red"
+      itemClass=""
+      subItemClass=""
       :color="$vuetify.theme.isDark ? black : blue"
       width="150"
     />
+
     <NavigationDrawer
+      v-if="!responsiveNav"
       drawerClass="mt-n2"
-      height="90vh"
+      height="100vh"
       :color="$vuetify.theme.isDark ? black : blue"
       :items="items"
       permanent
-      itemClass="green text-white"
-      subItemClass="grey"
+      itemClass="white--text green"
+      subItemClass="white--text red"
     />
   </div>
 </template>
