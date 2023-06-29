@@ -1,6 +1,32 @@
 <template>
   <v-container fluid class="pa-0">
-    <v-footer> </v-footer>
+    <v-footer>
+      <v-row class="pa-2" align="center">
+        <v-col cols="5" sm="4">
+          <VuetifyImage
+            src="city.png"
+            :width="$vuetify.breakpoint.smAndDown ? 120 : 150"
+          />
+        </v-col>
+        <v-spacer></v-spacer>
+        <v-col cols="7" sm="8">
+          <div
+            v-for="(item, index) in footerData"
+            :key="index"
+            class="d-flex justify-end"
+          >
+            <NuxtLink
+              :to="item.to"
+              :class="[
+                'text-decoration-none my-1',
+                $vuetify.theme.isDark ? 'white--text' : 'black--text',
+              ]"
+              >{{ item.text }}</NuxtLink
+            >
+          </div>
+        </v-col>
+      </v-row>
+    </v-footer>
     <v-row class="ma-0 pa-2">
       <v-col
         cols="12"
@@ -45,6 +71,25 @@ export default {
         { red: 'youtube', to: 'https://youtube.com/' },
         { red: 'twitch', to: 'https://www.twitch.tv/' },
         { red: 'linkedin', to: 'https://www.linkedin.com/' },
+      ],
+      footerData: [
+        {
+          text: 'Preguntas frecuentes',
+          // inside to add route to navigate through, and then call :to="item.to"
+          to: '',
+        },
+        {
+          text: 'Centro de ayuda',
+          to: '',
+        },
+        {
+          text: 'Términos de uso',
+          to: '',
+        },
+        {
+          text: 'Privacidad',
+          to: '',
+        },
       ],
     }
   },

@@ -9,7 +9,7 @@ export default {
         return {
             black: '#212121',
             white: '#FFFFFF',
-            blue: '#0380c2',
+            blue: '#223143',
         }
     }
 }

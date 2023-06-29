@@ -1,11 +1,15 @@
 <template>
   <div class="background-image-container">
+    <VuetifyImage
+      src="city.png"
+      :width="$vuetify.breakpoint.smAndDown ? 100 : 200"
+      class="ml-5"
+    />
     <v-container fluid>
-      <Switchs @updatedSwitch="switchTheme = $event" inset color="white" />
       <div class="d-flex justify-center">
         <Card
-          width="450"
-          height="600"
+          :width="$vuetify.breakpoint.smAndDown ? 350 : 450"
+          :height="$vuetify.breakpoint.smAndDown ? 350 : 550"
           cardClass="wrapper-login"
           color="cardBg"
           elevation="10"
@@ -46,6 +50,14 @@
                     text="Iniciar sesión"
                     @click="routeLogin"
                     nuxt
+                  />
+                </v-col>
+                <v-col cols="12" align-self="end">
+                  <Switchs
+                    @updatedSwitch="switchTheme = $event"
+                    inset
+                    color="white"
+                    label="Dark/Light theme"
                   />
                 </v-col>
               </v-row>

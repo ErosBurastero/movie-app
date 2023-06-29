@@ -1,9 +1,9 @@
 <template>
   <v-app>
-    <v-main>
+    <v-container fluid class="pa-0">
       <Nuxt />
-    </v-main>
-    <TheFooter />
+      <TheFooter />
+    </v-container>
   </v-app>
 </template>
 
