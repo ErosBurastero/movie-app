@@ -1,12 +1,52 @@
 <template>
   <div class="background-image-container">
     <v-container fluid>
+      <Switchs @updatedSwitch="switchTheme = $event" inset color="white" />
+      <div class="d-flex justify-center">
+        <Card width="450" height="600" cardClass="wrapper-login">
+          <template #content>
+            <v-container>
+              <v-card-title class="pa-0">Inicia sesión</v-card-title>
+              <v-row class="pt-5">
+                <v-col cols="12">
+                  <TextField
+                    filled
+                    dense
+                    v-model="email"
+                    label="Email"
+                    type="email"
+                    @input="$v.$touch()"
+                    :error-messages="errorHandler('email', errorData.email)"
+                  />
+                  <TextField
+                    class="mt-n3"
+                    filled
+                    dense
+                    v-model="password"
+                    label="Contraseña"
+                    type="password"
+                    @input="$v.$touch()"
+                    :error-messages="
+                      errorHandler('password', errorData.password)
+                    "
+                  />
+                </v-col>
+                <v-col cols="12" class="py-0">
+                  <Button
+                    class="w-100"
+                    text="Iniciar sesión"
+                    @click="routeLogin"
+                    nuxt
+                  />
+                </v-col>
+              </v-row>
+            </v-container>
+          </template>
+        </Card>
+      </div>
+
       <!-- <Pagination v-model="currentPage" :length="8" />
-      <Switchs
-        @updatedSwitch="switchTheme = $event"
-        inset
-        prepend-icon="mdi-brightness-4"
-      />
+      
       <div>
         <p class="primary">HOLAHOLA</p>
         <p class="accent">HOLA</p>
@@ -19,15 +59,45 @@
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import errorMultipleHandler from '~/mixins/errorHandler'
 export default {
   name: 'IndexPage',
+  mixins: [errorMultipleHandler, validationMixin],
   data() {
     return {
       movies: [],
       switchTheme: false,
       currentPage: 1,
       movieToSearch: 'love',
+      email: '',
+      password: '',
+      errorData: {
+        email: [
+          { name: 'required', message: 'Email es requerido' },
+          {
+            name: 'minLength',
+            message: 'Email debe tener al menos 4 caracteres',
+          },
+          {
+            name: 'maxLength',
+            message: 'Email no puede tener mas de 50 caracteres',
+          },
+        ],
+        password: [{ name: 'required', message: 'Contraseña es requerido' }],
+      },
     }
+  },
+  validations: {
+    email: {
+      required,
+      minLength: minLength(4),
+      maxLength: maxLength(50),
+    },
+    password: {
+      required,
+    },
   },
 
   async created() {
@@ -46,10 +116,15 @@ export default {
           this.currentPage
         )
         this.movies = response
-        console.log(response)
+        // console.log(response)
       } catch (error) {
         console.log(error)
       }
+    },
+    routeLogin() {
+      this.$v.$touch()
+      if (this.$v.$error) return
+      this.$router.push('/peliculas')
     },
   },
   watch: {
@@ -66,7 +141,7 @@ export default {
 <style>
 .background-image-container {
   height: 100vh;
-  background-image: url('/pochoclo.webp');
+  background-image: url('/peli.avif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

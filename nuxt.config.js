@@ -28,7 +28,7 @@ export default {
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: ['~/plugins/services.js', ],
+    plugins: ['~/plugins/services.js', { src: './plugins/vuelidate.js', mode: 'client' }, ],
 
     components: [
         { path: '~/components', prefix: '', pathPrefix: false }
@@ -59,15 +59,15 @@ export default {
         theme: {
             dark: false,
             themes: {
-                // light: {
-                //     primary: colors.teal.lighten1,
-                //     accent: colors.amber.darken3,
-                //     secondary: colors.blue.darken3,
-                //     info: colors.teal.lighten1,
-                //     warning: colors.amber.base,
-                //     error: colors.deepOrange.accent4,
-                //     success: colors.green.accent3,
-                // },
+                light: {
+                    primary: colors.teal.lighten1,
+                    accent: colors.amber.darken3,
+                    secondary: colors.blue.darken3,
+                    info: colors.teal.lighten1,
+                    warning: colors.amber.base,
+                    error: colors.deepOrange.accent4,
+                    success: colors.green.accent3,
+                },
                 dark: {
                     primary: colors.blue.darken2,
                     accent: colors.grey.darken3,

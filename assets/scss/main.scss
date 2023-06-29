@@ -7,3 +7,33 @@
 .oswald {
     font-family: $oswald !important;
 }
+
+.w-100 {
+    width: 100%;
+}
+
+.wrapper-login {
+    width: 100%;
+    max-width: 450px;
+    padding: 50px;
+}
+
+.wrapper {
+    width: 90%;
+    max-width: none;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 1050px) {
+    .wrapper {
+        width: 95%;
+        max-width: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .wrapper {
+        width: 90%;
+        max-width: none;
+    }
+}
