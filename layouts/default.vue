@@ -3,6 +3,7 @@
     <v-main>
       <Nuxt />
     </v-main>
+    <TheFooter />
   </v-app>
 </template>
 

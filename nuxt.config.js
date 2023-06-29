@@ -60,6 +60,7 @@ export default {
             dark: false,
             themes: {
                 light: {
+                    socialMediaLight: '#757575',
                     cardBg: colors.grey.lighten3,
                     primary: colors.teal.lighten1,
                     accent: colors.amber.darken3,
@@ -70,6 +71,7 @@ export default {
                     success: colors.green.accent3,
                 },
                 dark: {
+                    socialMediaDark: '#FAFAFA',
                     cardBg: colors.black,
                     primary: colors.blue.darken2,
                     accent: colors.grey.darken3,
