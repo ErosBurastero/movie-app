@@ -2,6 +2,8 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
+    target: 'static',
+    ssr: false,
     head: {
         titleTemplate: '%s - verifarma',
         title: 'verifarma',
@@ -14,14 +16,21 @@ export default {
             { hid: 'description', name: 'description', content: '' },
             { name: 'format-detection', content: 'telephone=no' },
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            {
+                rel: 'stylesheet',
+                href: "https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto&family=Rowdies:wght@300&family=Staatliches&display=swap"
+            },
+        ],
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css
-    css: [],
+    css: [
+        '~/assets/scss/main.scss',
+    ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: ['~/plugins/services.js', ],
+    plugins: ['~/plugins/services.js', { src: './plugins/vuelidate.js', mode: 'client' }, ],
 
     components: [
         { path: '~/components', prefix: '', pathPrefix: false }
@@ -48,11 +57,22 @@ export default {
 
     // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
     vuetify: {
-        customVariables: ['~/assets/variables.scss'],
+        customVariables: ['~/assets/scss/variables.scss'],
         theme: {
-            dark: true,
+            dark: false,
             themes: {
+                light: {
+                    cardBg: colors.grey.lighten3,
+                    primary: colors.teal.lighten1,
+                    accent: colors.amber.darken3,
+                    secondary: colors.blue.darken3,
+                    info: colors.teal.lighten1,
+                    warning: colors.amber.base,
+                    error: colors.deepOrange.accent4,
+                    success: colors.green.accent3,
+                },
                 dark: {
+                    cardBg: colors.grey.darken4,
                     primary: colors.blue.darken2,
                     accent: colors.grey.darken3,
                     secondary: colors.amber.darken3,
@@ -62,6 +82,10 @@ export default {
                     success: colors.green.accent3,
                 },
             },
+        },
+
+        options: {
+            customProperties: true,
         },
     },
 

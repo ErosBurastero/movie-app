@@ -1,87 +1,171 @@
 <template>
-  <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-col>
-  </v-row>
+  <div class="background-image-container">
+    <VuetifyImage
+      src="city.png"
+      :width="$vuetify.breakpoint.smAndDown ? 100 : 200"
+      class="ml-5"
+    />
+    <v-container fluid>
+      <div class="d-flex justify-center">
+        <Card
+          :width="$vuetify.breakpoint.smAndDown ? 350 : 450"
+          :height="$vuetify.breakpoint.smAndDown ? 350 : 550"
+          cardClass="wrapper-login"
+          color="cardBg"
+          elevation="10"
+          shaped
+        >
+          <template #content>
+            <v-container>
+              <v-card-title class="pa-0 display-1">Inicia sesión</v-card-title>
+              <v-row class="pt-5">
+                <v-col cols="12">
+                  <TextField
+                    filled
+                    :color="$vuetify.theme.isDark ? white : black"
+                    dense
+                    v-model="email"
+                    label="Email"
+                    type="email"
+                    @input="$v.$touch()"
+                    :error-messages="errorHandler('email', errorData.email)"
+                  />
+                  <TextField
+                    class="mt-n2"
+                    :color="$vuetify.theme.isDark ? white : black"
+                    filled
+                    dense
+                    v-model="password"
+                    label="Contraseña"
+                    type="password"
+                    @input="$v.$touch()"
+                    :error-messages="
+                      errorHandler('password', errorData.password)
+                    "
+                  />
+                </v-col>
+                <v-col cols="12" class="py-0">
+                  <Button
+                    class="w-100 py-5"
+                    text="Iniciar sesión"
+                    @click="routeLogin"
+                    nuxt
+                  />
+                </v-col>
+                <v-col cols="12" align-self="end">
+                  <Switchs
+                    @updatedSwitch="switchTheme = $event"
+                    inset
+                    color="white"
+                    label="Dark/Light theme"
+                  />
+                </v-col>
+              </v-row>
+            </v-container>
+          </template>
+        </Card>
+      </div>
+
+      <!-- <Pagination v-model="currentPage" :length="8" />
+      
+      <div>
+        <p class="primary">HOLAHOLA</p>
+        <p class="accent">HOLA</p>
+        <p class="secondary">HOLA</p>
+        <p class="warning">HOLA</p>
+        <p class="error">HOLA</p>
+      </div> -->
+    </v-container>
+  </div>
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import errorMultipleHandler from '~/mixins/errorHandler'
+import colorVariables from '~/mixins/colorVariables'
 export default {
   name: 'IndexPage',
+  mixins: [errorMultipleHandler, validationMixin, colorVariables],
+  data() {
+    return {
+      movies: [],
+      switchTheme: false,
+      currentPage: 1,
+      movieToSearch: 'love',
+      email: '',
+      password: '',
+      errorData: {
+        email: [
+          { name: 'required', message: 'Email es requerido' },
+          {
+            name: 'minLength',
+            message: 'Email debe tener al menos 4 caracteres',
+          },
+          {
+            name: 'maxLength',
+            message: 'Email no puede tener mas de 50 caracteres',
+          },
+        ],
+        password: [{ name: 'required', message: 'Contraseña es requerido' }],
+      },
+    }
+  },
+  validations: {
+    email: {
+      required,
+      minLength: minLength(4),
+      maxLength: maxLength(50),
+    },
+    password: {
+      required,
+    },
+  },
+
+  async created() {
+    try {
+      await this.fetchMovies()
+    } catch (error) {
+      console.log(error)
+    }
+  },
+
+  methods: {
+    async fetchMovies() {
+      try {
+        const response = await this.$getMovies(
+          this.movieToSearch,
+          this.currentPage
+        )
+        this.movies = response
+        // console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    routeLogin() {
+      this.$v.$touch()
+      if (this.$v.$error) return
+      this.$router.push('/peliculas')
+    },
+  },
+  watch: {
+    currentPage: {
+      immediate: true,
+      handler: 'fetchMovies',
+    },
+    switchTheme(newDarkMode) {
+      this.$vuetify.theme.dark = newDarkMode
+    },
+  },
 }
 </script>
+<style>
+.background-image-container {
+  height: 100vh;
+  background-image: url('/peli.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+</style>
