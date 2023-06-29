@@ -18,6 +18,7 @@
                 <v-col cols="12">
                   <TextField
                     filled
+                    :color="$vuetify.theme.isDark ? white : black"
                     dense
                     v-model="email"
                     label="Email"
@@ -27,6 +28,7 @@
                   />
                   <TextField
                     class="mt-n2"
+                    :color="$vuetify.theme.isDark ? white : black"
                     filled
                     dense
                     v-model="password"
@@ -69,9 +71,10 @@
 import { validationMixin } from 'vuelidate'
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 import errorMultipleHandler from '~/mixins/errorHandler'
+import colorVariables from '~/mixins/colorVariables'
 export default {
   name: 'IndexPage',
-  mixins: [errorMultipleHandler, validationMixin],
+  mixins: [errorMultipleHandler, validationMixin, colorVariables],
   data() {
     return {
       movies: [],

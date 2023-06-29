@@ -4,17 +4,13 @@
     <v-row class="ma-0 pa-2">
       <v-col
         cols="12"
-        md="9"
         sm="9"
         class="d-flex justify-md-start justify-sm-start align-center"
       >
-        <p class="f-body-2 roboto color-negro-1 ma-0">
-          Todos los derechos reservados 2023
-        </p>
+        <p class="roboto ma-0">Todos los derechos reservados 2023</p>
       </v-col>
       <v-col
         cols="12"
-        md="3"
         sm="3"
         class="d-flex justify-md-end justify-sm-end align-center"
         :class="{ 'ma-0 pa-2': $vuetify.breakpoint.xsOnly }"
@@ -24,8 +20,8 @@
           :key="index"
           :href="data.to"
           :red="data.red"
-          :color="$vuetify.theme.isDark ? 'white' : 'black'"
-          :logo="$vuetify.theme.isDark ? '#000000' : 'white'"
+          :color="$vuetify.theme.isDark ? white : black"
+          :logo="$vuetify.theme.isDark ? black : white"
           viewBox="0 0 32 40"
         />
       </v-col>
@@ -34,7 +30,9 @@
 </template>
 
 <script>
+import colorVariables from '~/mixins/colorVariables'
 export default {
+  mixins: [colorVariables],
   data() {
     return {
       socialMedias: [
