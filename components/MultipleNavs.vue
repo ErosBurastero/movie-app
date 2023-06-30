@@ -14,8 +14,7 @@
         v-if="responsiveNav"
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
-      <TextField v-model="search" @keyup.enter="searchFilms" />
-      {{ search }}
+      <TextField v-model="search" @keyup.enter="searchFilmsByName" />
     </v-app-bar>
     <NavigationDrawer
       app
@@ -32,7 +31,6 @@
       app
       v-if="!responsiveNav"
       drawerClass="mt-n2"
-      height="100vh"
       :color="$vuetify.theme.isDark ? black : blue"
       :items="items"
       permanent
@@ -41,13 +39,14 @@
     >
       <template #content>
         <div class="text-center">
-          <p>AÑO DE LANZAMIENTO</p>
+          <p class="white--text text-left pl-4">AÑO DE LANZAMIENTO</p>
           <Button
             v-for="year in years"
             :key="year"
             :text="year"
             btnClass="mx-1 my-1 white--text"
             :color="blue_btn"
+            @click="searchFilmsByYear(year)"
           />
         </div>
       </template>
@@ -84,15 +83,17 @@ export default {
     },
   },
   methods: {
-    searchFilms() {
+    searchFilmsByName() {
       EventBus.$emit('setFilmName', this.search)
+    },
+    searchFilmsByYear(year) {
+      EventBus.$emit('setFilmYear', year)
     },
   },
 
   created() {
     const startYear = 2023
     const endYear = 1976
-
     for (let year = startYear; year >= endYear; year--) {
       this.years.push(year)
     }

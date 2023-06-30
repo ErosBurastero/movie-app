@@ -1,7 +1,11 @@
 <template>
   <div>
-    {{ movie }}
-    <Pagination v-model="currentPage" :length="8" />
+    {{ movies }}
+    <Pagination
+      v-model="currentPage"
+      :length="movies.totalResults / 10"
+      :total-visible="10"
+    />
   </div>
 </template>
 
@@ -14,16 +18,17 @@ export default {
     return {
       movies: [],
       currentPage: 1,
-      movieToSearch: 'love',
       movie: null,
+      year: null,
     }
   },
   methods: {
     async fetchMovies() {
       try {
         const response = await this.$getMovies(
-          this.movieToSearch,
-          this.currentPage
+          this.movie,
+          this.currentPage,
+          this.year
         )
         this.movies = response
         console.log(response)
@@ -41,12 +46,22 @@ export default {
   },
   mounted() {
     EventBus.$on('setFilmName', (movie) => {
-      console.log('movie', movie)
       this.movie = movie
+    })
+    EventBus.$on('setFilmYear', (year) => {
+      this.year = year
     })
   },
   watch: {
     currentPage: {
+      immediate: true,
+      handler: 'fetchMovies',
+    },
+    movie: {
+      immediate: true,
+      handler: 'fetchMovies',
+    },
+    year: {
       immediate: true,
       handler: 'fetchMovies',
     },
