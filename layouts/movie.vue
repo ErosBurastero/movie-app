@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="pa-0">
     <v-main>
       <MultipleNavs :responsiveNav="$vuetify.breakpoint.xsOnly" />
       <v-container fluid>

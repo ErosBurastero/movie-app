@@ -8,7 +8,7 @@
 export default {
   props: {
     text: {
-      type: String,
+      type: [String, Number],
       default: 'Click me',
     },
     btnClass: {

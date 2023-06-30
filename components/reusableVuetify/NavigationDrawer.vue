@@ -17,6 +17,7 @@
         :value="item.title"
         :append-icon="item.noIcon"
         :class="itemClass"
+        v-model="item.isOpen"
       >
         <template #activator>
           <v-list-item-title
@@ -38,6 +39,7 @@
         >
       </v-list-group>
     </v-list>
+    <slot name="content"></slot>
   </v-navigation-drawer>
 </template>
 

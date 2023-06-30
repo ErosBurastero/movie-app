@@ -1,11 +1,13 @@
 <template>
   <div>
-    hola
+    {{ movie }}
     <Pagination v-model="currentPage" :length="8" />
   </div>
 </template>
 
 <script>
+import EventBus from '~/services/eventBus'
+
 export default {
   layout: 'movie',
   data() {
@@ -13,6 +15,7 @@ export default {
       movies: [],
       currentPage: 1,
       movieToSearch: 'love',
+      movie: null,
     }
   },
   methods: {
@@ -36,6 +39,12 @@ export default {
       console.log(error)
     }
   },
+  mounted() {
+    EventBus.$on('setFilmName', (movie) => {
+      console.log('movie', movie)
+      this.movie = movie
+    })
+  },
   watch: {
     currentPage: {
       immediate: true,
@@ -44,5 +53,3 @@ export default {
   },
 }
 </script>
-
-<style></style>

@@ -10,6 +10,7 @@ export default {
             black: '#212121',
             white: '#FFFFFF',
             blue: '#223143',
+            blue_btn: 'rgba(0,0,0,.25)',
         }
     }
 }

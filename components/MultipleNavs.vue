@@ -14,6 +14,8 @@
         v-if="responsiveNav"
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
+      <TextField v-model="search" @keyup.enter="searchFilms" />
+      {{ search }}
     </v-app-bar>
     <NavigationDrawer
       app
@@ -36,12 +38,26 @@
       permanent
       itemClass="white--text green"
       subItemClass="white--text red"
-    />
+    >
+      <template #content>
+        <div class="text-center">
+          <p>AÑO DE LANZAMIENTO</p>
+          <Button
+            v-for="year in years"
+            :key="year"
+            :text="year"
+            btnClass="mx-1 my-1 white--text"
+            :color="blue_btn"
+          />
+        </div>
+      </template>
+    </NavigationDrawer>
   </div>
 </template>
 
 <script>
 import colorVariables from '~/mixins/colorVariables'
+import EventBus from '~/services/eventBus'
 
 export default {
   mixins: [colorVariables],
@@ -57,38 +73,29 @@ export default {
   },
   data() {
     return {
+      search: null,
       drawer: false,
-      items: [
-        {
-          isOpen: false,
-          title: 'Home',
-          icon: 'mdi-chevron-down',
-          path: '/',
-          subItems: [
-            {
-              path: '/test',
-              title: 'homes',
-              class: 'bg-blue',
-              titleClass: 'text-white',
-            },
-            {
-              path: '/test',
-              title: 'homeses',
-              class: 'bg-brown',
-              titleClass: 'text-white',
-            },
-            {
-              path: '/test',
-              title: 'homeseses',
-              class: 'bg-yellow',
-              titleClass: 'text-white',
-            },
-          ],
-        },
-      ],
+      years: [],
+    }
+  },
+  computed: {
+    items() {
+      return this.$allData.items
+    },
+  },
+  methods: {
+    searchFilms() {
+      EventBus.$emit('setFilmName', this.search)
+    },
+  },
+
+  created() {
+    const startYear = 2023
+    const endYear = 1976
+
+    for (let year = startYear; year >= endYear; year--) {
+      this.years.push(year)
     }
   },
 }
 </script>
-
-<style></style>
