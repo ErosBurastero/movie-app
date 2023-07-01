@@ -1,7 +1,10 @@
 <template>
   <v-tooltip v-bind="$attrs" :class="tooltipClass">
     <template #activator="{ on, attrs }">
-      <Icon v-bind="{ ...attrs, ...$attrs }" v-on="{ ...on, ...$listeners }" />
+      <Button
+        v-bind="{ ...attrs, ...$attrs }"
+        v-on="{ ...on, ...$listeners }"
+      />
     </template>
     <slot name="content"><span></span></slot>
   </v-tooltip>

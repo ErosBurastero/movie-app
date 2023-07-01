@@ -3,31 +3,46 @@
     <v-system-bar v-bind="$attrs" :class="systemClass" v-if="systemBar">
       <slot name="systemContent"></slot>
     </v-system-bar>
-    <v-app-bar
-      app
-      elevation="7"
-      :color="$vuetify.theme.isDark ? black : blue"
-      height="48"
-    >
+    <v-app-bar app elevation="7" :color="$vuetify.theme.isDark ? black : blue">
       <v-app-bar-nav-icon
         :color="$vuetify.theme.isDark ? white : black"
         v-if="responsiveNav"
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
-      <v-container fluid class="pa-0">
-        <v-row>
-          <v-col>
+      <v-container fluid>
+        <v-row no-gutters justify="center">
+          <v-col cols="6">
             <TextField
-              v-model="search"
               @keyup.enter="searchFilmsByName"
-              color="white"
-              inputClass="w-30"
+              @click="showInnerIcon"
+              v-model="search"
+              :background-color="white"
+              :color="white"
+              inputClass="w-70"
+              placeholder="Buscar"
+              rounded
+              hide-details
+              solo
+              outlined
+              flat
+              dense
             >
-              <template #append-outer>
-                <Tooltip right color="grey" size="18" @click="searchFilmsByName">
-                  <template #content> this is the content </template>
+              <template #prepend-inner>
+                <Icon :iconName="innerIcon" :size="innerIconSize" />
+              </template>
+              <template #append>
+                <Tooltip
+                  right
+                  color="grey"
+                  @click="searchFilmsByName"
+                  withIcon
+                  size="25"
+                  text=""
+                  btnClass="myBtn"
+                  iconName="mdi-magnify"
+                >
+                  <template #content>Haz click aqui para buscar</template>
                 </Tooltip>
-                <!-- <Icon icon="mdi-magnify" @click="searchFilmsByName" /> -->
               </template>
             </TextField>
           </v-col>
@@ -92,6 +107,8 @@ export default {
     return {
       search: null,
       drawer: false,
+      innerIcon: '',
+      innerIconSize: '',
       years: [],
     }
   },
@@ -102,10 +119,16 @@ export default {
   },
   methods: {
     searchFilmsByName() {
+      if (this.search === null || this.search === '') return
       EventBus.$emit('setFilmName', this.search)
     },
     searchFilmsByYear(year) {
+      if (year === null || year === '') return
       EventBus.$emit('setFilmYear', year)
+    },
+    showInnerIcon() {
+      this.innerIcon = 'mdi-magnify'
+      this.innerIconSize = '20'
     },
   },
 
@@ -118,3 +141,17 @@ export default {
   },
 }
 </script>
+<style>
+.myBtn {
+  border-radius: 0px 20px 20px 0px;
+  height: 48px !important;
+  width: 60px !important;
+}
+.v-text-field--rounded .v-input__slot {
+  padding-right: 0 !important;
+  padding-left: 14px !important;
+}
+.v-btn__content {
+  justify-content: start !important;
+}
+</style>

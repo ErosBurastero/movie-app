@@ -1,6 +1,22 @@
 <template>
   <div>
-    {{ movies }}
+    <v-container>
+      <v-row>
+        <v-col
+          v-for="(movie, index) in movies"
+          :key="index"
+          width="200"
+          cols="2"
+        >
+          <Card>
+            <template #content>
+              <VuetifyImage :src="movie.Poster" />
+            </template>
+          </Card>
+        </v-col>
+      </v-row>
+    </v-container>
+
     <Pagination
       v-model="currentPage"
       :length="movies.totalResults / 10"
@@ -30,7 +46,7 @@ export default {
           this.currentPage,
           this.year
         )
-        this.movies = response
+        this.movies = response.Search
         console.log(response)
       } catch (error) {
         console.log(error)
