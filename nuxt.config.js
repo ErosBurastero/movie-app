@@ -30,7 +30,9 @@ export default {
     ],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: ['~/plugins/services.js', { src: './plugins/vuelidate.js', mode: 'client' }, ],
+    plugins: ['~/plugins/services.js', '~/plugins/dataServices',
+        { src: './plugins/vuelidate.js', mode: 'client' },
+    ],
 
     components: [
         { path: '~/components', prefix: '', pathPrefix: false }

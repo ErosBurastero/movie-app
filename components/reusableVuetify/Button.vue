@@ -1,6 +1,6 @@
 <template>
   <v-btn v-bind="$attrs" v-on="$listeners" :class="btnClass"
-    ><Icon v-bind="$attrs" v-if="withIcon" />{{ text }}</v-btn
+    ><Icon v-bind="$attrs" v-if="withIcon" color="white" />{{ text }}</v-btn
   >
 </template>
 
@@ -8,7 +8,7 @@
 export default {
   props: {
     text: {
-      type: String,
+      type: [String, Number],
       default: 'Click me',
     },
     btnClass: {

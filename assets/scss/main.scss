@@ -8,8 +8,23 @@
     font-family: $oswald !important;
 }
 
+.h-100 {
+    height: 100%;
+}
+
 .w-100 {
     width: 100%;
+}
+
+.w-70 {
+    width: 70%;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .wrapper-login {

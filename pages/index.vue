@@ -9,7 +9,7 @@
       <div class="d-flex justify-center">
         <Card
           :width="$vuetify.breakpoint.smAndDown ? 350 : 450"
-          :height="$vuetify.breakpoint.smAndDown ? 350 : 550"
+          :height="$vuetify.breakpoint.smAndDown ? 450 : 550"
           cardClass="wrapper-login"
           color="cardBg"
           elevation="10"
@@ -46,7 +46,7 @@
                 </v-col>
                 <v-col cols="12" class="py-0">
                   <Button
-                    class="w-100 py-5"
+                    class="w-100 py-5 text-center"
                     text="Iniciar sesión"
                     @click="routeLogin"
                     nuxt
@@ -65,16 +65,6 @@
           </template>
         </Card>
       </div>
-
-      <!-- <Pagination v-model="currentPage" :length="8" />
-      
-      <div>
-        <p class="primary">HOLAHOLA</p>
-        <p class="accent">HOLA</p>
-        <p class="secondary">HOLA</p>
-        <p class="warning">HOLA</p>
-        <p class="error">HOLA</p>
-      </div> -->
     </v-container>
   </div>
 </template>
@@ -89,10 +79,7 @@ export default {
   mixins: [errorMultipleHandler, validationMixin, colorVariables],
   data() {
     return {
-      movies: [],
       switchTheme: false,
-      currentPage: 1,
-      movieToSearch: 'love',
       email: '',
       password: '',
       errorData: {
@@ -122,27 +109,7 @@ export default {
     },
   },
 
-  async created() {
-    try {
-      await this.fetchMovies()
-    } catch (error) {
-      console.log(error)
-    }
-  },
-
   methods: {
-    async fetchMovies() {
-      try {
-        const response = await this.$getMovies(
-          this.movieToSearch,
-          this.currentPage
-        )
-        this.movies = response
-        // console.log(response)
-      } catch (error) {
-        console.log(error)
-      }
-    },
     routeLogin() {
       this.$v.$touch()
       if (this.$v.$error) return
@@ -150,10 +117,6 @@ export default {
     },
   },
   watch: {
-    currentPage: {
-      immediate: true,
-      handler: 'fetchMovies',
-    },
     switchTheme(newDarkMode) {
       this.$vuetify.theme.dark = newDarkMode
     },
