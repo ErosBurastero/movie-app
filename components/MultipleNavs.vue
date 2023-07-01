@@ -14,7 +14,25 @@
         v-if="responsiveNav"
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
-      <TextField v-model="search" @keyup.enter="searchFilmsByName" />
+      <v-container fluid class="pa-0">
+        <v-row>
+          <v-col>
+            <TextField
+              v-model="search"
+              @keyup.enter="searchFilmsByName"
+              color="white"
+              inputClass="w-30"
+            >
+              <template #append-outer>
+                <Tooltip right color="grey" size="18" @click="searchFilmsByName">
+                  <template #content> this is the content </template>
+                </Tooltip>
+                <!-- <Icon icon="mdi-magnify" @click="searchFilmsByName" /> -->
+              </template>
+            </TextField>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-app-bar>
     <NavigationDrawer
       app
