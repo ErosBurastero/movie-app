@@ -1,14 +1,17 @@
 <template>
   <div>
     <v-container>
-      <v-row>
+      <v-row class="d-flex justify-center">
         <v-col
           v-for="(movie, index) in movies"
           :key="index"
-          width="200"
-          cols="2"
+          cols="6"
+          lg="2"
+          md="4"
+          class="align-stretch w-100"
         >
           <Card
+            cardClass="h-100"
             nuxt
             :to="{
               name: 'peliculas-id',
@@ -16,14 +19,28 @@
             }"
           >
             <template #content>
-              <VuetifyImage :src="movie.Poster" imageClass="image" />
+              <VuetifyImage
+                :src="
+                  movie.Poster === 'N/A' ? '/noAvailable.jpg' : movie.Poster
+                "
+                imageClass="image"
+                :max-height="$vuetify.breakpoint.mdAndUp ? 300 : 200"
+              />
+              <div class="pa-2">
+                <h3>{{ movie.Title }}</h3>
+                <span>{{ 'Año ' + movie.Year }}</span>
+              </div>
             </template>
           </Card>
         </v-col>
       </v-row>
     </v-container>
 
-    <Pagination v-model="currentPage" :length="10" :total-visible="10" />
+    <Pagination
+      v-model="currentPage"
+      :length="pagination"
+      :total-visible="10"
+    />
   </div>
 </template>
 
@@ -36,6 +53,8 @@ export default {
     return {
       movies: [],
       currentPage: 1,
+      pagination: null,
+      totalResults: null,
       movie: null,
       year: null,
     }
@@ -48,8 +67,15 @@ export default {
           this.currentPage,
           this.year
         )
-        this.movies = response.Search
-        console.log('search', response)
+        if (response.Response === 'True') {
+          this.movies = response.Search
+          this.totalResults = parseInt(response.totalResults)
+          if (this.totalResults > 10) {
+            this.pagination = Math.ceil(this.totalResults / 10)
+          } else {
+            this.pagination = 1
+          }
+        }
       } catch (error) {
         console.log(error)
       }

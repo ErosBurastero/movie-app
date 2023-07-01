@@ -16,7 +16,7 @@
 export default {
   props: {
     inputClass: {
-      type: String,
+      type: [String, Array],
       default: '',
     },
   },

@@ -11,14 +11,14 @@
       ></v-app-bar-nav-icon>
       <v-container fluid>
         <v-row no-gutters justify="center">
-          <v-col cols="6">
+          <v-col cols="12" md="6" align-self="center">
             <TextField
               @keyup.enter="searchFilmsByName"
               @click="showInnerIcon"
               v-model="search"
               :background-color="white"
               :color="white"
-              inputClass="w-70"
+              :inputClass="$vuetify.breakpoint.smAndUp ? 'w-70' : 'w-100'"
               placeholder="Buscar"
               rounded
               hide-details
