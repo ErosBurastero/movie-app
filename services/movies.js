@@ -10,5 +10,13 @@ export default () => {
                 console.log(error)
             }
         },
+        getMovieDetails: async(id) => {
+            try {
+                const response = await axios.get(`http://www.omdbapi.com/?i=${id}&apikey=${process.env.OMBD_API}&plot=full`);
+                return response.data
+            } catch (error) {
+                console.log(error)
+            }
+        },
     }
 }

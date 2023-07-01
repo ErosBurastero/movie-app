@@ -46,7 +46,7 @@
                 </v-col>
                 <v-col cols="12" class="py-0">
                   <Button
-                    class="w-100 py-5"
+                    class="w-100 py-5 text-center"
                     text="Iniciar sesión"
                     @click="routeLogin"
                     nuxt

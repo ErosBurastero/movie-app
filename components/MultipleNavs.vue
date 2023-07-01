@@ -151,7 +151,7 @@ export default {
   padding-right: 0 !important;
   padding-left: 14px !important;
 }
-.v-btn__content {
+::v-deep .v-btn__content {
   justify-content: start !important;
 }
 </style>

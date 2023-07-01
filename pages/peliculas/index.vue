@@ -8,20 +8,22 @@
           width="200"
           cols="2"
         >
-          <Card>
+          <Card
+            nuxt
+            :to="{
+              name: 'peliculas-id',
+              params: { id: movie.imdbID },
+            }"
+          >
             <template #content>
-              <VuetifyImage :src="movie.Poster" />
+              <VuetifyImage :src="movie.Poster" imageClass="image" />
             </template>
           </Card>
         </v-col>
       </v-row>
     </v-container>
 
-    <Pagination
-      v-model="currentPage"
-      :length="movies.totalResults / 10"
-      :total-visible="10"
-    />
+    <Pagination v-model="currentPage" :length="10" :total-visible="10" />
   </div>
 </template>
 
@@ -47,7 +49,7 @@ export default {
           this.year
         )
         this.movies = response.Search
-        console.log(response)
+        console.log('search', response)
       } catch (error) {
         console.log(error)
       }
