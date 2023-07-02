@@ -6,8 +6,9 @@
           v-for="(movie, index) in movies"
           :key="index"
           cols="6"
-          lg="2"
+          lg="3"
           md="4"
+          xl="2"
           class="align-stretch w-100"
         >
           <Card
@@ -44,7 +45,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <div v-else class="elseContainer d-flex justify-center pa-10">
+    <div v-else class="h-100vh d-flex justify-center pa-10">
       <VuetifyImage
         src="/images/notFound.jpg"
         max-width="400"
@@ -145,8 +146,3 @@ export default {
   },
 }
 </script>
-<style scoped>
-.elseContainer {
-  height: 100vh;
-}
-</style>

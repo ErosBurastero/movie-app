@@ -1,5 +1,5 @@
 <template>
-  <div class="info-container bg-movies">
+  <div class="h-100vh bg-movies">
     <v-container fluid class="pa-10" v-if="movieInformation">
       <v-row>
         <v-col cols="8" class="d-flex">
@@ -63,21 +63,17 @@ export default {
   data() {
     return {
       movieInformation: null,
+      movieId: null,
     }
   },
   async created() {
     try {
-      const response = await this.$getMovieDetails(this.$route.params.id)
+      this.movieId = this.$route.params.id
+      const response = await this.$getMovieDetails(this.movieId)
       this.movieInformation = response
-      console.log('info', this.movieInformation)
     } catch (error) {
       console.log(error)
     }
   },
 }
 </script>
-<style scoped>
-.info-container {
-  height: 100vh;
-}
-</style>

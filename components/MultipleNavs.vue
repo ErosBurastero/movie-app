@@ -18,6 +18,7 @@
               v-model="search"
               :background-color="white"
               :color="blue"
+              light
               :inputClass="$vuetify.breakpoint.smAndUp ? 'w-70' : 'w-100'"
               placeholder="Buscar"
               rounded
@@ -28,7 +29,11 @@
               dense
             >
               <template #prepend-inner>
-                <Icon :iconName="innerIcon" :size="innerIconSize" />
+                <Icon
+                  :iconName="innerIcon"
+                  :size="innerIconSize"
+                  :color="black"
+                />
               </template>
               <template #append>
                 <Tooltip right>

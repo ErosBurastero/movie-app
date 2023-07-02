@@ -9,7 +9,6 @@ export default {
             isOpen: false,
             title: 'Configuracion',
             icon: 'mdi-cog-outline',
-            path: '/',
             subItems: [{
                     path: '/test',
                     title: 'homes',
