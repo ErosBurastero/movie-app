@@ -1,8 +1,12 @@
 <template>
-  <div class="h-100vh bg-movies">
-    <v-container fluid class="pa-10" v-if="movieInformation">
+  <div class="bg-movies">
+    <v-container fluid class="pa-0" v-if="movieInformation">
       <v-row>
-        <v-col cols="8" class="d-flex">
+        <v-col
+          cols="12"
+          lg="8"
+          :class="['pa-10', $vuetify.breakpoint.lgAndUp ? 'd-flex' : '']"
+        >
           <VuetifyImage
             :src="
               movieInformation.Poster === 'N/A'
@@ -10,16 +14,26 @@
                 : movieInformation.Poster
             "
             imageClass="image"
-            :max-width="450"
-            :max-height="$vuetify.breakpoint.mdAndUp ? 700 : 500"
+            :max-width="$vuetify.breakpoint.lgAndUp ? 450 : ''"
+            :max-height="$vuetify.breakpoint.lgAndUp ? 700 : 500"
           />
-          <div class="pl-7 white--text">
+          <div
+            :class="[
+              'white--text',
+              $vuetify.breakpoint.mdAndDown ? 'my-5' : 'pl-7',
+            ]"
+          >
             <h2>
               {{
                 movieInformation.Title + ' ( ' + movieInformation.Year + ' )'
               }}
             </h2>
-            <div class="d-flex align-center mb-4">
+            <div
+              :class="[
+                'mb-4',
+                $vuetify.breakpoint.xsOnly ? '' : 'd-flex align-center',
+              ]"
+            >
               <h3>Rating:</h3>
               <Rating
                 ratingClass="pl-3"

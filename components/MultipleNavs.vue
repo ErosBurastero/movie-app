@@ -144,9 +144,9 @@ export default {
     searchFilmsByName() {
       if (this.search === null || this.search === '') return
       EventBus.$emit('setFilmName', this.search)
+      this.searchFilmsByYear('')
     },
     searchFilmsByYear(year) {
-      if (year === null || year === '') return
       EventBus.$emit('setFilmYear', year)
     },
     showInnerIcon() {
