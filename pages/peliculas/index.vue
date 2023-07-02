@@ -3,13 +3,21 @@
     <v-container fluid class="pa-10" v-if="movies && response">
       <MovieCard :movies="movies" :color="blue" />
     </v-container>
-    <div v-if="response === false" class="d-flex justify-center pa-10">
+    <div
+      v-if="response === false"
+      :class="[
+        'd-flex justify-center pa-10',
+        $vuetify.breakpoint.smAndDown && 'flex-wrap',
+      ]"
+    >
       <VuetifyImage
         src="/images/notFound.jpg"
         max-width="400"
         max-height="500"
       />
-      <div class="pl-4 white--text">
+      <div
+        :class="['pl-4 white--text', $vuetify.breakpoint.smAndDown && 'mt-10']"
+      >
         <h2 class="font-weight-regular">
           La {{ type === 'movie' ? 'pelicula' : 'serie' }} "<span
             class="font-weight-bold"
