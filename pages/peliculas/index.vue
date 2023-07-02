@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-container>
+  <div class="bg-movies">
+    <v-container fluid class="pa-10">
       <v-row class="d-flex justify-center">
         <v-col
           v-for="(movie, index) in movies"
@@ -12,6 +12,7 @@
         >
           <Card
             cardClass="h-100"
+            :color="blue"
             nuxt
             :to="{
               name: 'peliculas-id',
@@ -21,14 +22,16 @@
             <template #content>
               <VuetifyImage
                 :src="
-                  movie.Poster === 'N/A' ? '/noAvailable.jpg' : movie.Poster
+                  movie.Poster === 'N/A'
+                    ? '/images/noAvailable.jpg'
+                    : movie.Poster
                 "
                 imageClass="image"
                 :max-height="$vuetify.breakpoint.mdAndUp ? 300 : 200"
               />
-              <div class="pa-2">
-                <h3>{{ movie.Title }}</h3>
-                <span>{{ 'Año ' + movie.Year }}</span>
+              <div class="pa-4">
+                <h3 class="white--text">{{ movie.Title }}</h3>
+                <span class="white--text">{{ 'Año ' + movie.Year }}</span>
               </div>
             </template>
           </Card>
@@ -37,6 +40,7 @@
     </v-container>
 
     <Pagination
+      paginationClass="pb-9"
       v-model="currentPage"
       :length="pagination"
       :total-visible="10"
@@ -45,10 +49,12 @@
 </template>
 
 <script>
+import colorVariables from '~/mixins/colorVariables'
 import EventBus from '~/services/eventBus'
 
 export default {
   layout: 'movie',
+  mixins: [colorVariables],
   data() {
     return {
       movies: [],

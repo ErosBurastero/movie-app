@@ -1,6 +1,10 @@
 <template>
-  <div>
-    {{ movieInformation }}
+  <div class="info-container bg-movies">
+    <v-container fluid class="pa-10">
+      <v-row>
+        <v-col> {{ movieInformation }} </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -16,9 +20,15 @@ export default {
     try {
       const response = await this.$getMovieDetails(this.$route.params.id)
       this.movieInformation = response
+      console.log('info', this.movieInformation)
     } catch (error) {
       console.log(error)
     }
   },
 }
 </script>
+<style scoped>
+.info-container {
+  height: 80vh;
+}
+</style>

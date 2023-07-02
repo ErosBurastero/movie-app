@@ -29,6 +29,16 @@ export default {
         '~/assets/scss/main.scss',
     ],
 
+    build: {
+        loaders: {
+            sass: {
+                implementation: require('sass'),
+            },
+            scss: {
+                implementation: require('sass'),
+            },
+        },
+    },
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
     plugins: ['~/plugins/services.js', '~/plugins/dataServices',
         { src: './plugins/vuelidate.js', mode: 'client' },
@@ -84,10 +94,6 @@ export default {
                     success: colors.green.accent3,
                 },
             },
-        },
-
-        options: {
-            customProperties: true,
         },
     },
 

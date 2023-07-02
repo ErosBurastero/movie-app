@@ -17,10 +17,11 @@
         :value="item.title"
         :append-icon="item.noIcon"
         :class="itemClass"
-        v-model="item.isOpen"
+        v-model="item.isOpen" 
       >
         <template #activator>
           <v-list-item-title
+            @click="$router.push({ path: item.path })"
             :class="$vuetify.theme.isDark ? 'white--text' : 'black--text'"
             >{{ item.title }}</v-list-item-title
           >
@@ -71,6 +72,6 @@ export default {
 }
 
 ::v-deep .v-list-item__icon .theme--light.v-icon {
-  color: white !important;
+  color: $white !important;
 }
 </style>

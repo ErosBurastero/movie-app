@@ -10,7 +10,7 @@
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
       <v-container fluid>
-        <v-row no-gutters justify="center">
+        <v-row no-gutters justify="center" align="center">
           <v-col cols="12" md="6" align-self="center">
             <TextField
               @keyup.enter="searchFilmsByName"
@@ -151,7 +151,7 @@ export default {
   padding-right: 0 !important;
   padding-left: 14px !important;
 }
-::v-deep .v-btn__content {
+.v-btn__content {
   justify-content: start !important;
 }
 </style>
