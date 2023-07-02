@@ -1,3 +1,5 @@
+// exporting big json data
+
 export default {
     items: [{
             isOpen: false,
