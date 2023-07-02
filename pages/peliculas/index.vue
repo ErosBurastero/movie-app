@@ -1,9 +1,9 @@
 <template>
   <div class="bg-movies">
-    <v-container fluid class="pa-10" v-if="movies">
+    <v-container fluid class="pa-10" v-if="movies && response">
       <MovieCard :movies="movies" :color="blue" />
     </v-container>
-    <div v-else class="h-100vh d-flex justify-center pa-10">
+    <div v-if="response === false" class="h-100vh d-flex justify-center pa-10">
       <VuetifyImage
         src="/images/notFound.jpg"
         max-width="400"
@@ -11,17 +11,16 @@
       />
       <div class="pl-4 white--text">
         <h2 class="font-weight-regular">
-          No se ha podido encontrar la pelicula con el nombre "<span
-            class="font-weight-bold"
-            >{{ movie }}</span
-          >"
+          La pelicula "<span class="font-weight-bold">{{ movie }}</span
+          >" no se ha podido encontrar.
         </h2>
-        <h3 class="font-weight-regular">Por favor, intente nuevamente</h3>
+        <h3 class="font-weight-regular">Por favor, intente nuevamente.</h3>
       </div>
     </div>
     <Pagination
       v-if="response"
       :color="white"
+      circle
       paginationClass="pb-9"
       v-model="currentPage"
       :length="pagination"

@@ -10,7 +10,7 @@
                 : movieInformation.Poster
             "
             imageClass="image"
-            :max-width="350"
+            :max-width="450"
             :max-height="$vuetify.breakpoint.mdAndUp ? 700 : 500"
           />
           <div class="pl-7 white--text">
@@ -26,8 +26,9 @@
                 size="25"
                 dense
                 readonly
+                half-increments
                 :length="10"
-                :value="parseInt(movieInformation.imdbRating)"
+                :value="parseFloat(movieInformation.imdbRating)"
                 :background-color="white"
                 :color="blue"
               />

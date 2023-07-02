@@ -22,7 +22,7 @@ export default {
   color: $white !important;
   width: 48px;
   height: 48px;
-  font-size: 16px;
+  font-size: 20px;
 }
 ::v-deep .v-pagination__navigation {
   background-color: $blue !important;
@@ -39,7 +39,7 @@ export default {
     color: $white !important;
     width: 28px;
     height: 35px;
-    font-size: 20px;
+    font-size: 15 px;
   }
   ::v-deep .v-pagination__navigation {
     background-color: $blue !important;

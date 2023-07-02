@@ -7,7 +7,7 @@
       lg="3"
       md="4"
       xl="2"
-      class="align-stretch w-100"
+      :class="['align-stretch w-100', $vuetify.breakpoint.xlOnly && 'mx-2']"
     >
       <Card
         v-bind="$attrs"
