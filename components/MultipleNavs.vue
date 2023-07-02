@@ -78,7 +78,7 @@
       subItemClass="white--text red"
     >
       <template #content>
-        <div class="text-center mt-10">
+        <div class="text-center mt-1">
           <div class="d-flex align-start">
             <p class="white--text text-left pl-4 pr-2">AÑO DE LANZAMIENTO</p>
             <Tooltip right>
@@ -92,7 +92,7 @@
                 />
               </template>
               <template #content
-                >Filtra la pelicula que buscaste por año</template
+                >Filtra la pelicula que buscaste por añoAS</template
               >
             </Tooltip>
           </div>
