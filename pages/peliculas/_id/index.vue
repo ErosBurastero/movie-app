@@ -15,7 +15,9 @@
           />
           <div class="pl-7 white--text">
             <h2>
-              {{ movieInformation.Title + '( ' + movieInformation.Year + ' )' }}
+              {{
+                movieInformation.Title + ' ( ' + movieInformation.Year + ' )'
+              }}
             </h2>
             <div class="d-flex align-center mb-4">
               <h3>Rating:</h3>
@@ -30,7 +32,11 @@
                 :color="blue"
               />
               <h3 class="pl-2 mt-1">
-                {{ '( ' + movieInformation.Ratings[0].Value + ' )' }}
+                {{
+                  +movieInformation.Ratings.length === 0
+                    ? movieInformation.imdbRating
+                    : ' ( ' + movieInformation.Ratings[0].Value + ' )'
+                }}
               </h3>
             </div>
             <h4 class="font-weight-bold mt-4">Sinopsis:</h4>

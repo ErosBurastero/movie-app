@@ -11,7 +11,7 @@
           class="align-stretch w-100"
         >
           <Card
-            cardClass="h-100"
+            cardClass="h-100 pb-4"
             :color="blue"
             nuxt
             :to="{
@@ -29,10 +29,16 @@
                 imageClass="image"
                 :max-height="$vuetify.breakpoint.mdAndUp ? 330 : 200"
               />
-              <div class="pa-4">
-                <h3 class="white--text">{{ movie.Title }}</h3>
-                <span class="white--text">{{ 'Año ' + movie.Year }}</span>
-              </div>
+              <v-card-title
+                :class="[
+                  'white--text',
+                  $vuetify.breakpoint.smAndDown && 'subtitle-1',
+                ]"
+                >{{ movie.Title }}</v-card-title
+              >
+              <v-card-subtitle class="white--text">{{
+                'Año ' + movie.Year
+              }}</v-card-subtitle>
             </template>
           </Card>
         </v-col>

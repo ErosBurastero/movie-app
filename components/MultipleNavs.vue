@@ -73,7 +73,7 @@
       subItemClass="white--text red"
     >
       <template #content>
-        <div class="text-center">
+        <div class="text-center mt-10">
           <div class="d-flex align-start">
             <p class="white--text text-left pl-4 pr-2">AÑO DE LANZAMIENTO</p>
             <Tooltip right>
