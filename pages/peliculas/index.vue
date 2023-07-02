@@ -1,6 +1,6 @@
 <template>
   <div class="bg-movies">
-    <v-container fluid class="pa-10">
+    <v-container fluid class="pa-10" v-if="movies && response">
       <v-row class="d-flex justify-center">
         <v-col
           v-for="(movie, index) in movies"
@@ -27,7 +27,7 @@
                     : movie.Poster
                 "
                 imageClass="image"
-                :max-height="$vuetify.breakpoint.mdAndUp ? 300 : 200"
+                :max-height="$vuetify.breakpoint.mdAndUp ? 330 : 200"
               />
               <div class="pa-4">
                 <h3 class="white--text">{{ movie.Title }}</h3>
@@ -38,8 +38,25 @@
         </v-col>
       </v-row>
     </v-container>
-
+    <div v-else class="elseContainer d-flex justify-center pa-10">
+      <VuetifyImage
+        src="/images/notFound.jpg"
+        max-width="400"
+        max-height="500"
+      />
+      <div class="pl-4 white--text">
+        <h2 class="font-weight-regular">
+          No se ha podido encontrar la pelicula con el nombre "<span
+            class="font-weight-bold"
+            >{{ movie }}</span
+          >"
+        </h2>
+        <h3 class="font-weight-regular">Por favor, intente nuevamente</h3>
+      </div>
+    </div>
     <Pagination
+      v-if="response"
+      :color="white"
       paginationClass="pb-9"
       v-model="currentPage"
       :length="pagination"
@@ -63,6 +80,7 @@ export default {
       totalResults: null,
       movie: null,
       year: null,
+      response: null,
     }
   },
   methods: {
@@ -76,11 +94,14 @@ export default {
         if (response.Response === 'True') {
           this.movies = response.Search
           this.totalResults = parseInt(response.totalResults)
+          this.response = true
           if (this.totalResults > 10) {
             this.pagination = Math.ceil(this.totalResults / 10)
           } else {
             this.pagination = 1
           }
+        } else {
+          this.response = false
         }
       } catch (error) {
         console.log(error)
@@ -118,3 +139,8 @@ export default {
   },
 }
 </script>
+<style scoped>
+.elseContainer {
+  height: 100vh;
+}
+</style>

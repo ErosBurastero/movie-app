@@ -1,19 +1,62 @@
 <template>
   <div class="info-container bg-movies">
-    <v-container fluid class="pa-10">
+    <v-container fluid class="pa-10" v-if="movieInformation">
       <v-row>
-        <v-col> {{ movieInformation }} </v-col>
+        <v-col cols="8" class="d-flex">
+          <VuetifyImage
+            :src="
+              movieInformation.Poster === 'N/A'
+                ? '/images/noAvailable.jpg'
+                : movieInformation.Poster
+            "
+            imageClass="image"
+            :max-width="350"
+            :max-height="$vuetify.breakpoint.mdAndUp ? 700 : 500"
+          />
+          <div class="pl-7 white--text">
+            <h2>
+              {{ movieInformation.Title + '( ' + movieInformation.Year + ' )' }}
+            </h2>
+            <div class="d-flex align-center mb-4">
+              <h3>Rating:</h3>
+              <Rating
+                ratingClass="pl-3"
+                size="25"
+                dense
+                readonly
+                :length="10"
+                :value="parseInt(movieInformation.imdbRating)"
+                :background-color="white"
+                :color="blue"
+              />
+              <h3 class="pl-2 mt-1">
+                {{ '( ' + movieInformation.Ratings[0].Value + ' )' }}
+              </h3>
+            </div>
+            <h4 class="font-weight-bold mt-4">Sinopsis:</h4>
+            <span>{{ movieInformation.Plot }}</span>
+            <h3 class="mt-4">Actores: {{ movieInformation.Actors }}</h3>
+            <h3>Director: {{ movieInformation.Director }}</h3>
+            <h3>Escritor/es: {{ movieInformation.Writer }}</h3>
+            <h3>Fecha de estreno: {{ movieInformation.Released }}</h3>
+            <h3>Duracion: {{ movieInformation.Runtime }}</h3>
+            <h3>Genero: {{ movieInformation.Genre }}</h3>
+            <h3>Tipo: {{ movieInformation.Type }}</h3>
+          </div>
+        </v-col>
       </v-row>
     </v-container>
   </div>
 </template>
 
 <script>
+import colorVariables from '~/mixins/colorVariables'
 export default {
   layout: 'movie',
+  mixins: [colorVariables],
   data() {
     return {
-      movieInformation: [],
+      movieInformation: null,
     }
   },
   async created() {
@@ -29,6 +72,6 @@ export default {
 </script>
 <style scoped>
 .info-container {
-  height: 80vh;
+  height: 100vh;
 }
 </style>

@@ -2,12 +2,13 @@ export default {
     items: [{
             isOpen: false,
             noIcon: null,
+            icon: 'mdi-home',
             title: 'Inicio',
             path: '/peliculas',
         }, {
             isOpen: false,
-            title: 'Home',
-            icon: 'mdi-chevron-down',
+            title: 'Configuracion',
+            icon: 'mdi-cog-outline',
             path: '/',
             subItems: [{
                     path: '/test',
@@ -32,6 +33,7 @@ export default {
         {
             isOpen: false,
             noIcon: null,
+            icon: 'mdi-logout-variant',
             title: 'Cerrar Sesion',
             path: '/',
         },

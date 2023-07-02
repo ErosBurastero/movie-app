@@ -25,7 +25,7 @@ export default {
   font-size: 16px;
 }
 ::v-deep .v-pagination__item--active {
-  background-color: $blueBtn !important;
+  background-color: $white !important;
   color: $black !important;
 }
 ::v-deep .v-pagination__navigation {

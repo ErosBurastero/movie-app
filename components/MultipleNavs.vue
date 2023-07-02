@@ -11,13 +11,13 @@
       ></v-app-bar-nav-icon>
       <v-container fluid>
         <v-row no-gutters justify="center" align="center">
-          <v-col cols="12" md="6" align-self="center">
+          <v-col cols="12" md="6">
             <TextField
               @keyup.enter="searchFilmsByName"
               @click="showInnerIcon"
               v-model="search"
               :background-color="white"
-              :color="white"
+              :color="blue"
               :inputClass="$vuetify.breakpoint.smAndUp ? 'w-70' : 'w-100'"
               placeholder="Buscar"
               rounded
@@ -31,16 +31,20 @@
                 <Icon :iconName="innerIcon" :size="innerIconSize" />
               </template>
               <template #append>
-                <Tooltip
-                  right
-                  color="grey"
-                  @click="searchFilmsByName"
-                  withIcon
-                  size="25"
-                  text=""
-                  btnClass="myBtn"
-                  iconName="mdi-magnify"
-                >
+                <Tooltip right>
+                  <template #component="{ attrs, on }">
+                    <Button
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="searchFilmsByName"
+                      color="grey"
+                      withIcon
+                      size="25"
+                      text=""
+                      btnClass="myBtn"
+                      iconName="mdi-magnify"
+                    />
+                  </template>
                   <template #content>Haz click aqui para buscar</template>
                 </Tooltip>
               </template>
@@ -59,20 +63,34 @@
       :color="$vuetify.theme.isDark ? black : blue"
       width="150"
     />
-
     <NavigationDrawer
       app
       v-if="!responsiveNav"
-      drawerClass="mt-n2"
       :color="$vuetify.theme.isDark ? black : blue"
       :items="items"
       permanent
-      itemClass="white--text green"
+      itemClass="white--text"
       subItemClass="white--text red"
     >
       <template #content>
         <div class="text-center">
-          <p class="white--text text-left pl-4">AÑO DE LANZAMIENTO</p>
+          <div class="d-flex align-start">
+            <p class="white--text text-left pl-4 pr-2">AÑO DE LANZAMIENTO</p>
+            <Tooltip right>
+              <template #component="{ attrs, on }">
+                <Icon
+                  v-bind="attrs"
+                  v-on="on"
+                  :color="white"
+                  size="25"
+                  iconName="mdi-magnify"
+                />
+              </template>
+              <template #content
+                >Filtra la pelicula que buscaste por año</template
+              >
+            </Tooltip>
+          </div>
           <Button
             v-for="year in years"
             :key="year"
@@ -144,7 +162,7 @@ export default {
 <style>
 .myBtn {
   border-radius: 0px 20px 20px 0px;
-  height: 48px !important;
+  height: 38px !important;
   width: 60px !important;
 }
 .v-text-field--rounded .v-input__slot {
