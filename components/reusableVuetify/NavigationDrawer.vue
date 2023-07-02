@@ -22,7 +22,10 @@
         <template #activator>
           <Icon :iconName="item.icon" class="mr-2" :color="white" size="20" />
           <v-list-item-title
-            @click="$router.push({ path: item.path })"
+            @click="
+              $router.push({ path: item.path }),
+                item.type && searchFilmsByType(item.type)
+            "
             class="white--text"
             >{{ item.title }}</v-list-item-title
           >
@@ -47,6 +50,7 @@
 
 <script>
 import colorVariables from '~/mixins/colorVariables'
+import EventBus from '~/services/eventBus'
 
 export default {
   mixins: [colorVariables],
@@ -63,6 +67,12 @@ export default {
     },
     items: {
       type: Array,
+    },
+  },
+  methods: {
+    searchFilmsByType(type) {
+      if (type === null || type === '') return
+      EventBus.$emit('setFilmType', type)
     },
   },
 }

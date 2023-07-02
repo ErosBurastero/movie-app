@@ -3,7 +3,7 @@
     <v-container fluid class="pa-10" v-if="movies && response">
       <MovieCard :movies="movies" :color="blue" />
     </v-container>
-    <div v-if="response === false" class="h-100vh d-flex justify-center pa-10">
+    <div v-if="response === false" class="d-flex justify-center pa-10">
       <VuetifyImage
         src="/images/notFound.jpg"
         max-width="400"
@@ -11,7 +11,9 @@
       />
       <div class="pl-4 white--text">
         <h2 class="font-weight-regular">
-          La pelicula "<span class="font-weight-bold">{{ movie }}</span
+          La {{ type === 'movie' ? 'pelicula' : 'serie' }} "<span
+            class="font-weight-bold"
+            >{{ movie }}</span
           >" no se ha podido encontrar.
         </h2>
         <h3 class="font-weight-regular">Por favor, intente nuevamente.</h3>
@@ -45,6 +47,7 @@ export default {
       movie: null,
       year: null,
       response: null,
+      type: 'movie',
     }
   },
   methods: {
@@ -53,7 +56,8 @@ export default {
         const response = await this.$getMovies(
           this.movie,
           this.currentPage,
-          this.year
+          this.year,
+          this.type
         )
         if (response.Response === 'True') {
           this.movies = response.Search
@@ -86,6 +90,9 @@ export default {
     EventBus.$on('setFilmYear', (year) => {
       this.year = year
     })
+    EventBus.$on('setFilmType', (type) => {
+      this.type = type
+    })
   },
   watch: {
     currentPage: {
@@ -97,6 +104,10 @@ export default {
       handler: 'fetchMovies',
     },
     year: {
+      immediate: true,
+      handler: 'fetchMovies',
+    },
+    type: {
       immediate: true,
       handler: 'fetchMovies',
     },

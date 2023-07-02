@@ -3,7 +3,8 @@
     <v-col
       v-for="(movie, index) in movies"
       :key="index"
-      cols="6"
+      cols="12"
+      sm="6"
       lg="3"
       md="4"
       xl="2"

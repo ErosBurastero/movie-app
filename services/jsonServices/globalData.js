@@ -7,29 +7,24 @@ export default {
             icon: 'mdi-home',
             title: 'Inicio',
             path: '/peliculas',
-        }, {
+        },
+        {
             isOpen: false,
-            title: 'Configuracion',
-            icon: 'mdi-cog-outline',
-            subItems: [{
-                    path: '/test',
-                    title: 'homes',
-                    class: 'bg-blue',
-                    titleClass: 'text-white',
-                },
-                {
-                    path: '/test',
-                    title: 'homeses',
-                    class: 'bg-brown',
-                    titleClass: 'text-white',
-                },
-                {
-                    path: '/test',
-                    title: 'homeseses',
-                    class: 'bg-yellow',
-                    titleClass: 'text-white',
-                },
-            ],
+            noIcon: null,
+            icon: 'mdi-movie-open',
+            title: 'Peliculas',
+            type: "movie",
+            path: '/peliculas',
+
+        },
+        {
+            isOpen: false,
+            noIcon: null,
+            icon: 'mdi-video-vintage',
+            title: 'Series',
+            type: "series",
+            path: '/peliculas',
+
         },
         {
             isOpen: false,
