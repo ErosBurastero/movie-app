@@ -16,28 +16,41 @@ export default {
 }
 </script>
 //
-<style lang="scss" scoped>
-// ::v-deep .v-pagination__item {
-//   background-color: $negro5 !important;
-//   color: white !important;
-//   width: 48px;
-//   height: 48px;
-//   font-size: 16px;
-// }
-// ::v-deep .v-pagination__item--active {
-//   background-color: $acento1 !important;
-//   color: $negro1 !important;
-// }
-// ::v-deep .v-pagination__navigation {
-//   background-color: $negro5 !important;
-//   width: 48px;
-//   height: 48px;
-// }
-// ::v-deep .v-icon {
-//   color: grey;
-// }
-// ::v-deep .v-icon:hover {
-//   color: white;
-// }
-//
+<style scoped lang="scss">
+::v-deep .v-pagination__item {
+  background-color: $blue !important;
+  color: $white !important;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+}
+::v-deep .v-pagination__navigation {
+  background-color: $blue !important;
+  width: 48px;
+  height: 48px;
+}
+::v-deep .v-pagination__item--active {
+  background-color: $white !important;
+  color: $black !important;
+}
+@media screen and (max-width: 480px) {
+  ::v-deep .v-pagination__item {
+    background-color: $blue !important;
+    color: $white !important;
+    width: 28px;
+    height: 35px;
+    font-size: 15 px;
+  }
+  ::v-deep .v-pagination__navigation {
+    background-color: $blue !important;
+    width: 28px;
+    height: 35px;
+  }
+}
+::v-deep .v-icon {
+  color: grey;
+}
+::v-deep .v-icon:hover {
+  color: white;
+}
 </style>

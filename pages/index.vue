@@ -1,7 +1,7 @@
 <template>
   <div class="background-image-container">
     <VuetifyImage
-      src="city.png"
+      src="/images/city.png"
       :width="$vuetify.breakpoint.smAndDown ? 100 : 200"
       class="ml-5"
     />
@@ -123,12 +123,15 @@ export default {
   },
 }
 </script>
-<style>
+<style scoped>
 .background-image-container {
   height: 100vh;
-  background-image: url('/peli.avif');
+  background-image: url('/images/peli.avif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+::v-deep .v-btn__content {
+  justify-content: center !important;
 }
 </style>

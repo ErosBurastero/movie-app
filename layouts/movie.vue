@@ -1,11 +1,11 @@
 <template>
-  <v-app class="pa-0">
+  <v-app>
     <v-main>
-      <MultipleNavs :responsiveNav="$vuetify.breakpoint.xsOnly" />
-      <v-container fluid>
+      <MultipleNavs :responsiveNav="$vuetify.breakpoint.smAndDown" />
+      <v-container fluid class="pa-0">
         <Nuxt />
+        <TheFooter />
       </v-container>
-      <TheFooter />
     </v-main>
   </v-app>
 </template>

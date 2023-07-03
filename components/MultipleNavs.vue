@@ -5,19 +5,21 @@
     </v-system-bar>
     <v-app-bar app elevation="7" :color="$vuetify.theme.isDark ? black : blue">
       <v-app-bar-nav-icon
-        :color="$vuetify.theme.isDark ? white : black"
+      class="ml-2"
+        :color="white"
         v-if="responsiveNav"
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
       <v-container fluid>
-        <v-row no-gutters justify="center">
-          <v-col cols="12" md="6" align-self="center">
+        <v-row no-gutters justify="center" align="center">
+          <v-col cols="12" md="6">
             <TextField
               @keyup.enter="searchFilmsByName"
               @click="showInnerIcon"
               v-model="search"
               :background-color="white"
-              :color="white"
+              :color="blue"
+              light
               :inputClass="$vuetify.breakpoint.smAndUp ? 'w-70' : 'w-100'"
               placeholder="Buscar"
               rounded
@@ -28,19 +30,27 @@
               dense
             >
               <template #prepend-inner>
-                <Icon :iconName="innerIcon" :size="innerIconSize" />
+                <Icon
+                  :iconName="innerIcon"
+                  :size="innerIconSize"
+                  :color="black"
+                />
               </template>
               <template #append>
-                <Tooltip
-                  right
-                  color="grey"
-                  @click="searchFilmsByName"
-                  withIcon
-                  size="25"
-                  text=""
-                  btnClass="myBtn"
-                  iconName="mdi-magnify"
-                >
+                <Tooltip right>
+                  <template #component="{ attrs, on }">
+                    <Button
+                      v-bind="attrs"
+                      v-on="on"
+                      @click="searchFilmsByName"
+                      color="grey"
+                      withIcon
+                      size="25"
+                      text=""
+                      btnClass="myBtn"
+                      iconName="mdi-magnify"
+                    />
+                  </template>
                   <template #content>Haz click aqui para buscar</template>
                 </Tooltip>
               </template>
@@ -57,22 +67,36 @@
       itemClass=""
       subItemClass=""
       :color="$vuetify.theme.isDark ? black : blue"
-      width="150"
+      width="250"
     />
-
     <NavigationDrawer
       app
       v-if="!responsiveNav"
-      drawerClass="mt-n2"
       :color="$vuetify.theme.isDark ? black : blue"
       :items="items"
       permanent
-      itemClass="white--text green"
+      itemClass="white--text"
       subItemClass="white--text red"
     >
       <template #content>
-        <div class="text-center">
-          <p class="white--text text-left pl-4">AÑO DE LANZAMIENTO</p>
+        <div class="text-center mt-1">
+          <div class="d-flex align-start">
+            <p class="white--text text-left pl-4 pr-2">AÑO DE LANZAMIENTO</p>
+            <Tooltip right>
+              <template #component="{ attrs, on }">
+                <Icon
+                  v-bind="attrs"
+                  v-on="on"
+                  :color="white"
+                  size="25"
+                  iconName="mdi-magnify"
+                />
+              </template>
+              <template #content
+                >Filtra la pelicula que buscaste por añoAS</template
+              >
+            </Tooltip>
+          </div>
           <Button
             v-for="year in years"
             :key="year"
@@ -121,9 +145,9 @@ export default {
     searchFilmsByName() {
       if (this.search === null || this.search === '') return
       EventBus.$emit('setFilmName', this.search)
+      this.searchFilmsByYear('')
     },
     searchFilmsByYear(year) {
-      if (year === null || year === '') return
       EventBus.$emit('setFilmYear', year)
     },
     showInnerIcon() {
@@ -144,14 +168,14 @@ export default {
 <style>
 .myBtn {
   border-radius: 0px 20px 20px 0px;
-  height: 48px !important;
+  height: 38px !important;
   width: 60px !important;
 }
 .v-text-field--rounded .v-input__slot {
   padding-right: 0 !important;
   padding-left: 14px !important;
 }
-::v-deep .v-btn__content {
+.v-btn__content {
   justify-content: start !important;
 }
 </style>

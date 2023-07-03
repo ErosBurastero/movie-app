@@ -4,7 +4,7 @@
       <v-row class="pa-2" align="center">
         <v-col cols="5" sm="4">
           <VuetifyImage
-            src="city.png"
+            src="/images/city.png"
             :width="$vuetify.breakpoint.smAndDown ? 120 : 150"
           />
         </v-col>

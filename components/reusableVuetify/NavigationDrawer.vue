@@ -20,8 +20,13 @@
         v-model="item.isOpen"
       >
         <template #activator>
+          <Icon :iconName="item.icon" class="mr-2" :color="white" size="20" />
           <v-list-item-title
-            :class="$vuetify.theme.isDark ? 'white--text' : 'black--text'"
+            @click="
+              $router.push({ path: item.path }),
+                item.type && searchFilmsByType(item.type)
+            "
+            class="white--text"
             >{{ item.title }}</v-list-item-title
           >
         </template>
@@ -45,6 +50,7 @@
 
 <script>
 import colorVariables from '~/mixins/colorVariables'
+import EventBus from '~/services/eventBus'
 
 export default {
   mixins: [colorVariables],
@@ -63,14 +69,16 @@ export default {
       type: Array,
     },
   },
+  methods: {
+    searchFilmsByType(type) {
+      if (type === null || type === '') return
+      EventBus.$emit('setFilmType', type)
+    },
+  },
 }
 </script>
 <style lang="scss" scoped>
-::v-deep .v-navigation-drawer {
-  top: 45px !important;
-}
-
 ::v-deep .v-list-item__icon .theme--light.v-icon {
-  color: white !important;
+  color: $white !important;
 }
 </style>

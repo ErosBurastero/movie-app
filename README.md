@@ -6,6 +6,9 @@
 # install dependencies
 $ npm install
 
+# create .env file on the root of the project by copying .env.sample file content or file provided by email
+$ dot env file
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 
@@ -27,6 +30,7 @@ You can create the following extra directories, some of which have special behav
 
 The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
 
+
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
 
 ### `components`
@@ -41,6 +45,11 @@ Layouts are a great help when you want to change the look and feel of your Nuxt 
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
 
+
+### `mixins`
+
+The mixins directory helps you to avoid duplicating javascript code, by creating a js file with vue script syntax
+
 ### `pages`
 
 This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
@@ -52,6 +61,10 @@ More information about the usage of this directory in [the documentation](https:
 The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
+
+### `services`
+
+This directory contains your http request or big json files.
 
 ### `static`
 

@@ -2,9 +2,9 @@ import axios from './instance'
 
 export default () => {
     return {
-        getMovies: async(movie, pageNumber, year) => {
+        getMovies: async(movie, pageNumber, year, type) => {
             try {
-                const response = await axios.get(`http://www.omdbapi.com/?s=${movie}&apikey=${process.env.OMBD_API}&page=${pageNumber}&y=${year}`);
+                const response = await axios.get(`http://www.omdbapi.com/?s=${movie}&apikey=${process.env.OMBD_API}&type=${type}&page=${pageNumber}&y=${year}`);
                 return response.data;
             } catch (error) {
                 console.log(error)
@@ -18,5 +18,6 @@ export default () => {
                 console.log(error)
             }
         },
+
     }
 }
