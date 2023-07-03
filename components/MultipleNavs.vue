@@ -5,7 +5,8 @@
     </v-system-bar>
     <v-app-bar app elevation="7" :color="$vuetify.theme.isDark ? black : blue">
       <v-app-bar-nav-icon
-        :color="$vuetify.theme.isDark ? white : black"
+      class="ml-2"
+        :color="white"
         v-if="responsiveNav"
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
@@ -66,7 +67,7 @@
       itemClass=""
       subItemClass=""
       :color="$vuetify.theme.isDark ? black : blue"
-      width="150"
+      width="250"
     />
     <NavigationDrawer
       app

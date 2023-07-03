@@ -4,6 +4,9 @@ export default {
     // Global page headers: https://go.nuxtjs.dev/config-head
     target: 'static',
     ssr: false,
+    server: {
+        port: 3000 // default: 3000
+    },
     head: {
         titleTemplate: '%s - verifarma',
         title: 'verifarma',
@@ -69,7 +72,7 @@ export default {
 
     // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
     vuetify: {
-        customVariables: ['~/assets/scss/variables.scss'],
+        customVariables: ['~/assets/scss/_variables.scss'],
         theme: {
             dark: false,
             themes: {
